@@ -18,21 +18,35 @@ public class DatabaseUtilCommands implements CommandMarker {
 		if (payload == null) {
 			payload = "";
 		}
-			
-		recordDao.insert(new Record(id, payload));
+
+		try {
+			recordDao.insert(new Record(id, payload));
+		} catch (Exception e) {
+			return String.format("FAIL: %s", e.getClass().getSimpleName());
+		}
+
 		return "OK";
 	}
 
 	@CliCommand(value = "update", help = "Update an existing row in the monitored database table")
 	public String update(@CliOption(key = { "id" }, mandatory = true, help = "id of the row to update") int id,
 			@CliOption(key = { "payload" }, mandatory = true, help = "new payload of the record") String payload) {
-		recordDao.update(new Record(id, payload));
+		try {
+			recordDao.update(new Record(id, payload));
+		} catch (Exception e) {
+			return String.format("FAIL: %s", e.getClass().getSimpleName());
+		}
+
 		return "OK";
 	}
 
 	@CliCommand(value = "delete", help = "Delete an existing row from the monitored database table")
 	public String delete(@CliOption(key = { "id" }, mandatory = true, help = "id of the row to update") Integer id) {
-		recordDao.delete(id);
+		try {
+			recordDao.delete(id);
+		} catch (Exception e) {
+			return String.format("FAIL: %s", e.getClass().getSimpleName());
+		}
 		return "OK";
 	}
 

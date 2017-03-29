@@ -3,16 +3,14 @@ package hu.ferencbalogh.actionmonitor;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import hu.ferencbalogh.actionmonitor.messagebroker.MessageBrokerConfiguration;
-import hu.ferencbalogh.actionmonitor.messagebroker.MessageSender;
-import hu.ferencbalogh.actionmonitor.messagelistener.MessageListenerConfiguration;
-import hu.ferencbalogh.actionmonitor.messagelistener.MessageReceiver;
-import hu.ferencbalogh.actionmonitor.messagelistener.MessageReceiver.MessageListener;
+import hu.ferencbalogh.actionmonitor.activemq.receiver.MessageReceiver;
+import hu.ferencbalogh.actionmonitor.activemq.receiver.MessageReceiver.MessageListener;
+import hu.ferencbalogh.actionmonitor.activemq.sender.MessageSender;
 
 public class Test {
 	
 	public static void main(String[] args) throws InterruptedException {
-		ApplicationContext ctx = new AnnotationConfigApplicationContext(MessageBrokerConfiguration.class, MessageListenerConfiguration.class);
+		ApplicationContext ctx = new AnnotationConfigApplicationContext("hu.ferencbalogh.actionmonitor.activemq");
 		
 		MessageReceiver mr = ctx.getBean(MessageReceiver.class);
 		mr.register(new MessageListener() {

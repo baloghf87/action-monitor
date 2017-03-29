@@ -7,23 +7,26 @@
 	<packaging>pom</packaging>
 
 	<properties>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+
 		<hsqldb.version>2.3.4</hsqldb.version>
 		<spring.version>4.3.7.RELEASE</spring.version>
 		<spring.shell.version>1.2.0.RELEASE</spring.shell.version>
 		<activemq.version>5.14.4</activemq.version>
+		<javax.servlet-api.version>3.0.1</javax.servlet-api.version>
+		<spring-boot-starter-tomcat.version>1.5.2.RELEASE</spring-boot-starter-tomcat.version>
+		<spring-boot-starter-web.version>1.5.2.RELEASE</spring-boot-starter-web.version>
+		<jstl.version>1.2</jstl.version>
+		<tomcat-embed-jasper.version>8.5.12</tomcat-embed-jasper.version>
 	</properties>
-
-	<dependencies>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-context</artifactId>
-			<version>${spring.version}</version>
-		</dependency>
-	</dependencies>
 
 	<modules>
 		<module>database</module>
-		<module>configuration</module>		
+		<module>configuration</module>
+		<module>activemq</module>
+		<module>common</module>
+		<module>webserver</module>
 	</modules>
 
 </project>

@@ -15,12 +15,17 @@
 		</dependency>
 		<dependency>
 			<groupId>hu.ferencbalogh.action-monitor</groupId>
-			<artifactId>message-broker</artifactId>
+			<artifactId>activemq-broker</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>hu.ferencbalogh.action-monitor</groupId>
-			<artifactId>message-listener</artifactId>
+			<artifactId>activemq-receiver</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>hu.ferencbalogh.action-monitor</groupId>
+			<artifactId>activemq-sender</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 	</dependencies>
