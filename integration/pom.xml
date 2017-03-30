@@ -3,36 +3,31 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>hu.ferencbalogh.action-monitor</groupId>
-		<artifactId>database</artifactId>
+		<artifactId>parent</artifactId>
 		<version>1.0</version>
 	</parent>
-	<artifactId>database-monitor</artifactId>
-	<packaging>jar</packaging>
+	<artifactId>integration</artifactId>
 
 	<dependencies>
 		<dependency>
 			<groupId>hu.ferencbalogh.action-monitor</groupId>
-			<artifactId>configuration</artifactId>
+			<artifactId>database-monitor</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>${junit.version}</version>
-			<scope>test</scope>
+			<groupId>org.springframework.integration</groupId>
+			<artifactId>spring-integration-java-dsl</artifactId>
+			<version>${spring-integration-java-dsl.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.mockito</groupId>
-			<artifactId>mockito-all</artifactId>
-			<version>${mockito.version}</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-test</artifactId>
+			<groupId>org.springframework.integration</groupId>
+			<artifactId>spring-integration-jms</artifactId>
 			<version>${spring.version}</version>
-			<scope>test</scope>
 		</dependency>
-
+		<dependency>
+			<groupId>hu.ferencbalogh.action-monitor</groupId>
+			<artifactId>activemq-broker</artifactId>
+			<version>${project.version}</version>
+		</dependency>
 	</dependencies>
 </project>

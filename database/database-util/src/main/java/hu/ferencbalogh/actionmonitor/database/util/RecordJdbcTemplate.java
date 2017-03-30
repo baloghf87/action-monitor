@@ -5,6 +5,8 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import hu.ferencbalogh.actionmonitor.entity.Record;
+
 public class RecordJdbcTemplate implements RecordDao {
 
 	@Value("${hsql.tablename}")
@@ -17,10 +19,10 @@ public class RecordJdbcTemplate implements RecordDao {
 	}
 
 	public void insert(Record record) {
-		if(record.getId() != null){
+		if (record.getId() != null) {
 			String sql = "insert into " + tableName + " (id, payload) values (?, ?)";
 			jdbcTemplate.update(sql, record.getId(), record.getPayload());
-		}else{
+		} else {
 			String sql = "insert into " + tableName + " (payload) values (?)";
 			jdbcTemplate.update(sql, record.getPayload());
 		}

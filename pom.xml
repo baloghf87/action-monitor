@@ -17,16 +17,22 @@
 		<javax.servlet-api.version>3.0.1</javax.servlet-api.version>
 		<spring-boot-starter-tomcat.version>1.5.2.RELEASE</spring-boot-starter-tomcat.version>
 		<spring-boot-starter-web.version>1.5.2.RELEASE</spring-boot-starter-web.version>
+		<spring-boot-maven-plugin.version>1.5.2.RELEASE</spring-boot-maven-plugin.version>
 		<jstl.version>1.2</jstl.version>
 		<tomcat-embed-jasper.version>8.5.12</tomcat-embed-jasper.version>
+		<spring-integration-java-dsl.version>1.2.1.RELEASE</spring-integration-java-dsl.version>
+		<junit.version>4.12</junit.version>
+		<mockito.version>1.10.19</mockito.version>
+		<spring-integration-java-dsl.version>1.2.1.RELEASE</spring-integration-java-dsl.version>
 	</properties>
 
 	<modules>
+		<module>common</module>
 		<module>database</module>
 		<module>configuration</module>
-		<module>activemq</module>
-		<module>common</module>
+		<module>activemq-broker</module>
 		<module>webserver</module>
+		<module>integration</module>
 	</modules>
 
 </project>

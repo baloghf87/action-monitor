@@ -3,10 +3,10 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>hu.ferencbalogh.action-monitor</groupId>
-		<artifactId>database</artifactId>
+		<artifactId>parent</artifactId>
 		<version>1.0</version>
 	</parent>
-	<artifactId>database-monitor</artifactId>
+	<artifactId>activemq-broker</artifactId>
 	<packaging>jar</packaging>
 
 	<dependencies>
@@ -14,6 +14,26 @@
 			<groupId>hu.ferencbalogh.action-monitor</groupId>
 			<artifactId>configuration</artifactId>
 			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>hu.ferencbalogh.action-monitor</groupId>
+			<artifactId>common</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jms</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.activemq</groupId>
+			<artifactId>activemq-broker</artifactId>
+			<version>${activemq.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.activemq</groupId>
+			<artifactId>activemq-kahadb-store</artifactId>
+			<version>${activemq.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
@@ -27,12 +47,5 @@
 			<version>${mockito.version}</version>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-test</artifactId>
-			<version>${spring.version}</version>
-			<scope>test</scope>
-		</dependency>
-
 	</dependencies>
 </project>
