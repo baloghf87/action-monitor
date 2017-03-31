@@ -37,8 +37,7 @@ public class IntegrationTest {
 	@Test
 	public void testInsertWithoutId() throws InterruptedException {
 		recordDao.insert(new Record(null, ""));
-		String response = pollWebsocket();
-		assertTrue(response.startsWith("Table: ACTIONS, Action: INSERT:, Old: null, New: Record [id="));
+		assertTrue(pollWebsocket().startsWith("Table: ACTIONS, Action: INSERT:, Old: null, New: Record [id="));
 	}
 
 	@Test
@@ -61,6 +60,10 @@ public class IntegrationTest {
 		assertTrue(updateNotification.startsWith(expectedUpdateStart));
 		String actualUpdateEnd = updateNotification.substring(expectedUpdateStart.length());
 		assertTrue(actualUpdateEnd.contains("], New: Record [id=" + TEST_RECORD_ID + ", payload=example, "));
+
+		delete(TEST_RECORD_ID);
+		recordDao.update(new Record(TEST_RECORD_ID, "example"));
+		assertNull(pollWebsocket());
 	}
 
 	@Test

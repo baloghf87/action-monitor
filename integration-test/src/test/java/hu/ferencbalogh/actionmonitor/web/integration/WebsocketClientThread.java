@@ -70,7 +70,7 @@ public class WebsocketClientThread extends Thread {
 		}
 	};
 
-	StompSessionHandlerAdapter sessionHandler = new StompSessionHandlerAdapter() {
+	private StompSessionHandlerAdapter sessionHandler = new StompSessionHandlerAdapter() {
 		@Override
 		public Type getPayloadType(StompHeaders headers) {
 			return String.class;
