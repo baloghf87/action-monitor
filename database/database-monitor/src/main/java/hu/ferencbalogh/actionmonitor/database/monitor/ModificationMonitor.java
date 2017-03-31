@@ -1,4 +1,4 @@
-package hu.ferencbalogh.actionmonitor.database;
+package hu.ferencbalogh.actionmonitor.database.monitor;
 
 import java.util.Arrays;
 import java.util.LinkedHashSet;
@@ -10,6 +10,8 @@ import org.hsqldb.types.TimestampData;
 
 public class ModificationMonitor implements Trigger {
 
+	private static final int INDEX_TIMESTAMP = 2;
+	
 	private static Set<ModificationListener> modificationListeners = new LinkedHashSet<ModificationListener>();
 
 	public static boolean addListener(ModificationListener listener) {
@@ -30,12 +32,12 @@ public class ModificationMonitor implements Trigger {
 			List<Object> newRowAsList = null;
 
 			if (oldRow != null) {
-				oldRow[2] = ((TimestampData) oldRow[2]).getSeconds();
+				oldRow[INDEX_TIMESTAMP] = ((TimestampData) oldRow[INDEX_TIMESTAMP]).getSeconds();
 				oldRowAsList = Arrays.asList(oldRow);
 			}
 
 			if (newRow != null) {
-				newRow[2] = ((TimestampData) newRow[2]).getSeconds();
+				newRow[INDEX_TIMESTAMP] = ((TimestampData) newRow[INDEX_TIMESTAMP]).getSeconds();
 				newRowAsList = Arrays.asList(newRow);
 			}
 

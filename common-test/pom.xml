@@ -3,29 +3,31 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>hu.ferencbalogh.action-monitor</groupId>
-		<artifactId>database</artifactId>
+		<artifactId>parent</artifactId>
 		<version>1.0</version>
 	</parent>
-	<artifactId>database-monitor</artifactId>
-	<packaging>jar</packaging>
+	<artifactId>common-test</artifactId>
 
 	<dependencies>
 		<dependency>
 			<groupId>hu.ferencbalogh.action-monitor</groupId>
-			<artifactId>configuration</artifactId>
+			<artifactId>common</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>${junit.version}</version>
-			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>hu.ferencbalogh.action-monitor</groupId>
-			<artifactId>common-test</artifactId>
-			<version>${project.version}</version>
-			<scope>test</scope>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-all</artifactId>
+			<version>${mockito.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${spring.version}</version>
 		</dependency>
 	</dependencies>
 </project>

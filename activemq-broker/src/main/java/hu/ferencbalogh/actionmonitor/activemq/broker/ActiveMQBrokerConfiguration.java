@@ -19,18 +19,21 @@ import hu.ferencbalogh.actionmonitor.activemq.transform.RawToRecordTransformer;
 @PropertySource("classpath:/action-monitor.properties")
 public class ActiveMQBrokerConfiguration {
 
-	@Value("${message-broker.url}")
+	@Value("${activemq.url}")
 	private String brokerUrl;
 
-	@Value("${message-broker.destination}")
+	@Value("${activemq.destination}")
 	private String destination;
+	
+	@Value("${activemq.trusted-packages}")
+	private String trustedPackages;
 
 	@Bean
 	public ConnectionFactory connectionFactory() {
 		ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory();
 		connectionFactory.setBrokerURL(brokerUrl);
 		connectionFactory.setTransformer(rawToRecordTransformer());
-		connectionFactory.setTrustedPackages(Arrays.asList("java.lang", "hu.ferencbalogh.actionmonitor"));
+		connectionFactory.setTrustedPackages(Arrays.asList(trustedPackages.split(",")));
 		return connectionFactory;
 	}
 

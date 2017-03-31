@@ -33,6 +33,8 @@
 		<module>activemq-broker</module>
 		<module>webserver</module>
 		<module>integration</module>
+		<module>common-test</module>
+		<module>integration-test</module>
 	</modules>
 
 </project>

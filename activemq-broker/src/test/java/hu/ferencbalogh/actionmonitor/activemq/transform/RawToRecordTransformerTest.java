@@ -10,13 +10,20 @@ import javax.jms.Message;
 import javax.jms.ObjectMessage;
 import javax.jms.Session;
 
+import org.apache.activemq.MessageTransformer;
 import org.junit.Test;
 import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Scope;
+import org.springframework.test.context.ContextConfiguration;
 
+import hu.ferencbalogh.actionmonitor.database.AbstractSpringTest;
 import hu.ferencbalogh.actionmonitor.entity.Action;
 import hu.ferencbalogh.actionmonitor.entity.Record;
 
-public class RawToRecordTransformerTest {
+@ContextConfiguration(classes = RawToRecordTransformerTest.class)
+public class RawToRecordTransformerTest extends AbstractSpringTest{
 
 	private static final String NAME = "name";
 
@@ -24,8 +31,15 @@ public class RawToRecordTransformerTest {
 
 	private static final ObjectMessage MOCK_OBJECT_MESSAGE = Mockito.mock(ObjectMessage.class);
 
-	private RawToRecordTransformer transformer = new RawToRecordTransformer();
+	@Autowired
+	private MessageTransformer transformer;
 
+	@Bean
+	@Scope("singleton")
+	public MessageTransformer rawToRecordTransformer() {
+		return new RawToRecordTransformer();
+	}
+	
 	@Test
 	public void testProducerTransformNoRows() throws JMSException {
 		Session session = getMockSession();

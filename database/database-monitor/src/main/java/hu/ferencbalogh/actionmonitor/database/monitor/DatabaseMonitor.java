@@ -1,4 +1,4 @@
-package hu.ferencbalogh.actionmonitor.database;
+package hu.ferencbalogh.actionmonitor.database.monitor;
 
 import java.sql.Connection;
 import java.sql.ResultSet;

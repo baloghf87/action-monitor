@@ -8,10 +8,10 @@
 			var stompClient = null;
 		
 			function connect() {
-				var socket = new SockJS('/action-monitor');
+				var socket = new SockJS('/${endpoint}');
 				stompClient = Stomp.over(socket);
 				stompClient.connect({}, function(frame) {
-					stompClient.subscribe('/actions', function(calResult) {
+					stompClient.subscribe('/${topic}', function(calResult) {
 						print(calResult.body);
 					});
 					

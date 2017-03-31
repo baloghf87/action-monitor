@@ -9,7 +9,8 @@ import org.hsqldb.types.TimestampData;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import hu.ferencbalogh.actionmonitor.database.ModificationMonitor.ModificationListener;
+import hu.ferencbalogh.actionmonitor.database.monitor.ModificationMonitor;
+import hu.ferencbalogh.actionmonitor.database.monitor.ModificationMonitor.ModificationListener;
 
 public class ModificationMonitorTest {
 

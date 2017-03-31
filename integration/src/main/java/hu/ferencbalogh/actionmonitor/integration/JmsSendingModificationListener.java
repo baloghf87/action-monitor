@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.core.MessageCreator;
 
-import hu.ferencbalogh.actionmonitor.database.ModificationMonitor.ModificationListener;
+import hu.ferencbalogh.actionmonitor.database.monitor.ModificationMonitor.ModificationListener;
 
 public class JmsSendingModificationListener implements ModificationListener {
 	@Autowired
@@ -23,7 +23,7 @@ public class JmsSendingModificationListener implements ModificationListener {
 				message.setObjectProperty("oldRow", oldRow);
 				message.setObjectProperty("newRow", newRow);
 				message.setStringProperty("name", name);
-				message.setStringProperty("table", table);				
+				message.setStringProperty("table", table);
 				return message;
 			}
 		});

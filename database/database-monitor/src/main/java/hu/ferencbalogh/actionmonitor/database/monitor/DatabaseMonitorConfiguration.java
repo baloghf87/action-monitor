@@ -1,4 +1,4 @@
-package hu.ferencbalogh.actionmonitor.database;
+package hu.ferencbalogh.actionmonitor.database.monitor;
 
 import java.io.IOException;
 import java.sql.Connection;
