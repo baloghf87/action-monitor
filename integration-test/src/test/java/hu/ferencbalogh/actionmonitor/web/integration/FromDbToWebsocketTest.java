@@ -15,8 +15,13 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 import hu.ferencbalogh.actionmonitor.database.util.RecordDao;
 import hu.ferencbalogh.actionmonitor.entity.Record;
-
-public class IntegrationTest {
+/**
+ * <p>End-to-end test: manipulate database and assert output on websocket</p>
+ * 
+ * @author Ferenc Balogh - baloghf87@gmail.com
+ *
+ */
+public class FromDbToWebsocketTest {
 
 	private static final String WEBSOCKET_URL = "ws://localhost:8080/action-monitor";
 	private static final String WEBSOCKET_TOPIC = "/actions";
@@ -31,8 +36,22 @@ public class IntegrationTest {
 	private static final Object WEBSOCKET_CONNECT_SYNC = new Object();
 	private static final BlockingQueue<String> WEBSOCKET_QUEUE = new ArrayBlockingQueue<>(1);
 
-	private static AnnotationConfigApplicationContext ctx;
 	private static RecordDao recordDao;
+	private static AnnotationConfigApplicationContext ctx;
+
+	@BeforeClass
+	public static void setup() throws InterruptedException {
+		startApplication();
+		createContextAndDAO();
+		connectToWebSocket();
+	}
+
+	@AfterClass
+	public static void teardown() {
+		closeWebsocket();
+		closeApplication();
+		closeContext();
+	}
 
 	@Test
 	public void testInsertWithoutId() throws InterruptedException {
@@ -79,26 +98,13 @@ public class IntegrationTest {
 		assertNull(delete(TEST_RECORD_ID));
 	}
 
-	@BeforeClass
-	public static void setup() throws InterruptedException {
-		startApplication();
-		createTestApplicationContext();
-		connectToWebSocket();
-	}
-
-	@AfterClass
-	public static void teardown() {
-		closeWebsocket();
-		closeApplication();
-	}
-
 	private static void startApplication() throws InterruptedException {
 		ApplicationThread applicationThread = new ApplicationThread(APPLICATION_STARTED_SYNC, APPLICATION_EXIT_SYNC);
 		applicationThread.start();
 		waitFor(APPLICATION_STARTED_SYNC);
 	}
 
-	private static void createTestApplicationContext() {
+	private static void createContextAndDAO() {
 		ctx = new AnnotationConfigApplicationContext(IntegrationTestContext.class);
 		recordDao = ctx.getBean(RecordDao.class);
 		assertNotNull(recordDao);
@@ -126,6 +132,10 @@ public class IntegrationTest {
 
 	private static void closeWebsocket() {
 		notify(WEBSOCKET_EXIT_SYNC);
+	}
+
+	private static void closeContext() {
+		ctx.close();
 	}
 
 	private static void notify(Object sync) {

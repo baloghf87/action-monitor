@@ -5,6 +5,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+/**
+ * <p>
+ * Web application controller
+ * </p>
+ * 
+ * @author Ferenc Balogh - baloghf87@gmail.com
+ *
+ */
 @Controller
 public class WebAppController {
 

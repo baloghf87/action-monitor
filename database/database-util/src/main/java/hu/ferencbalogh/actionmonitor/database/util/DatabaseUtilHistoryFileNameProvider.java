@@ -5,6 +5,12 @@ import org.springframework.core.annotation.Order;
 import org.springframework.shell.plugin.support.DefaultHistoryFileNameProvider;
 import org.springframework.stereotype.Component;
 
+/**
+ * <p>Provide custom history filename</p>
+ * 
+ * @author Ferenc Balogh - baloghf87@gmail.com
+ *
+ */
 @Component
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class DatabaseUtilHistoryFileNameProvider extends DefaultHistoryFileNameProvider {

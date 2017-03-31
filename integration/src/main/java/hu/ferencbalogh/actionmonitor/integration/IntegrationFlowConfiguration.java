@@ -3,6 +3,8 @@ package hu.ferencbalogh.actionmonitor.integration;
 import javax.annotation.PostConstruct;
 import javax.jms.ConnectionFactory;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -16,31 +18,47 @@ import org.springframework.integration.dsl.IntegrationFlows;
 import org.springframework.integration.dsl.jms.Jms;
 import org.springframework.messaging.MessageHandler;
 
-import hu.ferencbalogh.actionmonitor.database.monitor.ModificationMonitor;
+import hu.ferencbalogh.actionmonitor.database.monitor.DatabaseMonitor;
+import hu.ferencbalogh.actionmonitor.database.monitor.ModificationTrigger;
 import hu.ferencbalogh.actionmonitor.entity.Action;
 
+/**
+ * <p>
+ * Contains {@link IntegrationFlow}(s)
+ * </p>
+ * 
+ * <p>
+ * <ol>
+ * <li>Action objects from ActiveMQ -> inboundChannel -> Transform to string ->
+ * outboundChannel -> WebSocket clients</li>
+ * </ol>
+ * </p>
+ * 
+ * @author Ferenc Balogh - baloghf87@gmail.com
+ *
+ */
 @Configuration
 @EnableIntegration
 @ComponentScan
 public class IntegrationFlowConfiguration {
-
+	private static final Logger log = LoggerFactory.getLogger(DatabaseMonitor.class);
 
 	@Autowired
 	private ConnectionFactory connectionFactory;
 
 	@Value("${websocket.stomp.topic}")
 	private String topic;
-	
+
 	@PostConstruct
 	public void addModificationListener() {
-		ModificationMonitor.addListener(databaseModificationListener());
+		ModificationTrigger.addListener(databaseModificationListener());
 	}
 
 	@Bean
-	public JmsSendingModificationListener databaseModificationListener(){
+	public JmsSendingModificationListener databaseModificationListener() {
 		return new JmsSendingModificationListener();
 	};
-	
+
 	@Bean
 	public DirectChannel inboundChannel() {
 		return new DirectChannel();
@@ -55,6 +73,7 @@ public class IntegrationFlowConfiguration {
 	public String actionToStringTransformer(Action action) {
 		String text = String.format("Table: %s, Action: %s:, Old: %s, New: %s", action.getTable(), action.getAction(),
 				action.getOldRecord(), action.getNewRecord());
+		log.debug("Converted action to string: {}, result: {} ", action, text);
 		return text;
 	}
 

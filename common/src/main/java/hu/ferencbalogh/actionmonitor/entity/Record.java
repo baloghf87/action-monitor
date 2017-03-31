@@ -2,6 +2,20 @@ package hu.ferencbalogh.actionmonitor.entity;
 
 import java.io.Serializable;
 
+/**
+ * <p><b>Record entity</b></p>
+ * 
+ * <p>Contains the following:</p>
+ * 
+ * <p><ol>
+ * 	<li>id</li>
+ *  <li>payload</li>
+ *  <li>timestamp</li>
+ * </ol></p> 
+ * 
+ * @author Ferenc Balogh - baloghf87@gmail.com
+ *
+ */
 public class Record implements Serializable {
 	private Integer id;
 	private String payload;

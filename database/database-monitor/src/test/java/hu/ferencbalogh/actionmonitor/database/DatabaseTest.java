@@ -22,10 +22,16 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.test.context.ContextConfiguration;
 
 import hu.ferencbalogh.actionmonitor.database.monitor.DatabaseMonitor;
-import hu.ferencbalogh.actionmonitor.database.monitor.ModificationMonitor;
+import hu.ferencbalogh.actionmonitor.database.monitor.ModificationTrigger;
 
-@ContextConfiguration(classes = DatabaseMonitorTest.class)
-public class DatabaseMonitorTest extends AbstractSpringTest {
+/**
+ * <p> Test the starting of the server and initializing of the database table </p>
+ * 
+ * @author Ferenc Balogh - baloghf87@gmail.com
+ *
+ */
+@ContextConfiguration(classes = DatabaseTest.class)
+public class DatabaseTest extends AbstractSpringTest {
 
 	private static Statement MOCK_STATEMENT;
 	private static ResultSet MOCK_DATABASE_METADATA_RESULT_SET;
@@ -37,7 +43,7 @@ public class DatabaseMonitorTest extends AbstractSpringTest {
 	@Autowired
 	private DatabaseMonitor databaseMonitor;
 
-	private String triggerClass = ModificationMonitor.class.getCanonicalName();
+	private String triggerClass = ModificationTrigger.class.getCanonicalName();
 
 	private String tableName = "ACTIONS";
 
@@ -75,12 +81,12 @@ public class DatabaseMonitorTest extends AbstractSpringTest {
 
 		verifyStatementCalled("CREATE TABLE " + tableName
 				+ " (id INT IDENTITY,payload VARCHAR(255) NOT NULL,timestamp TIMESTAMP default CURRENT_TIMESTAMP);");
-		verifyStatementCalled(
-				"CREATE TRIGGER trig_delete AFTER DELETE ON ACTIONS FOR EACH ROW CALL \""+ModificationMonitor.class.getCanonicalName()+"\";");
-		verifyStatementCalled(
-				"CREATE TRIGGER trig_update AFTER UPDATE ON ACTIONS FOR EACH ROW CALL \""+ModificationMonitor.class.getCanonicalName()+"\";");
-		verifyStatementCalled(
-				"CREATE TRIGGER trig_insert AFTER INSERT ON ACTIONS FOR EACH ROW CALL \""+ModificationMonitor.class.getCanonicalName()+"\";");
+		verifyStatementCalled("CREATE TRIGGER trig_delete AFTER DELETE ON ACTIONS FOR EACH ROW CALL \""
+				+ ModificationTrigger.class.getCanonicalName() + "\";");
+		verifyStatementCalled("CREATE TRIGGER trig_update AFTER UPDATE ON ACTIONS FOR EACH ROW CALL \""
+				+ ModificationTrigger.class.getCanonicalName() + "\";");
+		verifyStatementCalled("CREATE TRIGGER trig_insert AFTER INSERT ON ACTIONS FOR EACH ROW CALL \""
+				+ ModificationTrigger.class.getCanonicalName() + "\";");
 	}
 
 	@Test

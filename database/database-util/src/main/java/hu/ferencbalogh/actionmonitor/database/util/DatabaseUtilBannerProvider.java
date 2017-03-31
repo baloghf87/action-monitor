@@ -6,6 +6,12 @@ import org.springframework.core.annotation.Order;
 import org.springframework.shell.plugin.support.DefaultBannerProvider;
 import org.springframework.stereotype.Component;
 
+/**
+ * <p>Provide custom banner and welcome message with instructions</p>
+ * 
+ * @author Ferenc Balogh - baloghf87@gmail.com
+ *
+ */
 @Component
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class DatabaseUtilBannerProvider extends DefaultBannerProvider {

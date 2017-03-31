@@ -4,6 +4,12 @@ import javax.sql.DataSource;
 
 import hu.ferencbalogh.actionmonitor.entity.Record;
 
+/**
+ * <p>Defines INSERT, UPDATE and DELETE operations</p>
+ * 
+ * @author Ferenc Balogh - baloghf87@gmail.com
+ *
+ */
 public interface RecordDao {
 
 	   public void setDataSource(DataSource ds);

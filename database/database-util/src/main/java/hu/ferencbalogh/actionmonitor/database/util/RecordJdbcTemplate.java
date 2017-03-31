@@ -7,6 +7,12 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import hu.ferencbalogh.actionmonitor.entity.Record;
 
+/**
+ * <p>Implementation of {@link RecordDao} using a {@link JdbcTemplate}</p>
+ * 
+ * @author Ferenc Balogh - baloghf87@gmail.com
+ *
+ */
 public class RecordJdbcTemplate implements RecordDao {
 
 	@Value("${hsql.tablename}")

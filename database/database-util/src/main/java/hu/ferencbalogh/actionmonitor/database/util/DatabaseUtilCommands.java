@@ -8,6 +8,12 @@ import org.springframework.stereotype.Component;
 
 import hu.ferencbalogh.actionmonitor.entity.Record;
 
+/**
+ * <p>Contains the available custom commands</p>
+ * 
+ * @author Ferenc Balogh - baloghf87@gmail.com
+ *
+ */
 @Component
 public class DatabaseUtilCommands implements CommandMarker {
 

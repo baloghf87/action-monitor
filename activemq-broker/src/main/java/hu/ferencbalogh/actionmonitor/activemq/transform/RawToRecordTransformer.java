@@ -9,38 +9,49 @@ import javax.jms.MessageProducer;
 import javax.jms.Session;
 
 import org.apache.activemq.MessageTransformer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 
 import hu.ferencbalogh.actionmonitor.entity.Action;
 import hu.ferencbalogh.actionmonitor.entity.Record;
 
+/**
+ * 
+ * Create a {@link Message} containing an {@link Action} from the raw data
+ * coming from the database
+ * 
+ * @author Ferenc Balogh - baloghf87@gmail.com
+ *
+ */
 public class RawToRecordTransformer implements MessageTransformer {
 
-
+	private static final Logger log = LoggerFactory.getLogger(RawToRecordTransformer.class);
+	
 	@Value("${action.name}")
 	private String name;
-	
+
 	@Value("${action.trigger-prefix}")
 	private String triggerPrefix;
-	
+
 	@Value("${action.table}")
 	private String table;
-	
+
 	@Value("${action.oldRow}")
 	private String oldRowName;
-	
+
 	@Value("${action.newRow}")
 	private String newRowName;
-	
+
 	@Value("${db.index.id}")
-	private int indexId = 0;
-	
+	private int indexId;
+
 	@Value("${db.index.payload}")
-	private int indexPayload = 1;
-	
+	private int indexPayload;
+
 	@Value("${db.index.timestamp}")
-	private int indexTimestamp = 2;
-	
+	private int indexTimestamp;
+
 	@Override
 	public Message producerTransform(Session session, MessageProducer producer, Message message) throws JMSException {
 		String actionName = message.getStringProperty(name).substring(triggerPrefix.length());

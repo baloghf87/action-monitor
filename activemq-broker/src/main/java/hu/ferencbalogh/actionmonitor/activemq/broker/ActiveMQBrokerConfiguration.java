@@ -10,11 +10,17 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.context.annotation.Scope;
 import org.springframework.jms.core.JmsTemplate;
 
 import hu.ferencbalogh.actionmonitor.activemq.transform.RawToRecordTransformer;
 
+/**
+ * 
+ * Configuration of the ActiveMQ broker
+ * 
+ * @author Ferenc Balogh - baloghf87@gmail.com
+ *
+ */
 @Configuration
 @PropertySource("classpath:/action-monitor.properties")
 public class ActiveMQBrokerConfiguration {
@@ -38,7 +44,6 @@ public class ActiveMQBrokerConfiguration {
 	}
 
 	@Bean
-	@Scope("singleton")
 	public MessageTransformer rawToRecordTransformer() {
 		return new RawToRecordTransformer();
 	}

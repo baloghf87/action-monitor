@@ -9,34 +9,40 @@ import org.hsqldb.types.TimestampData;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import hu.ferencbalogh.actionmonitor.database.monitor.ModificationMonitor;
-import hu.ferencbalogh.actionmonitor.database.monitor.ModificationMonitor.ModificationListener;
+import hu.ferencbalogh.actionmonitor.database.monitor.ModificationTrigger;
+import hu.ferencbalogh.actionmonitor.database.monitor.ModificationTrigger.ModificationListener;
 
+/**
+ * <p>Unit test for {@link ModificationMonitor}</p>
+ * 
+ * @author Ferenc Balogh - baloghf87@gmail.com
+ *
+ */
 public class ModificationMonitorTest {
 
 	@Test
 	public void testAddListener() {
 		ModificationListener listener = getMockListener();
-		assertTrue(ModificationMonitor.addListener(listener));
-		assertFalse(ModificationMonitor.addListener(listener));
+		assertTrue(ModificationTrigger.addListener(listener));
+		assertFalse(ModificationTrigger.addListener(listener));
 	}
 
 	@Test
 	public void testRemoveListener() {
 		ModificationListener listener = getMockListener();
-		assertFalse(ModificationMonitor.removeListener(listener));
-		assertTrue(ModificationMonitor.addListener(listener));
-		assertTrue(ModificationMonitor.removeListener(listener));
+		assertFalse(ModificationTrigger.removeListener(listener));
+		assertTrue(ModificationTrigger.addListener(listener));
+		assertTrue(ModificationTrigger.removeListener(listener));
 	}
 
 	@Test
 	public void testFireCallsAllListeners() {
 		ModificationListener l1 = getMockListener();
 		ModificationListener l2 = getMockListener();
-		ModificationMonitor.addListener(l1);
-		ModificationMonitor.addListener(l2);
+		ModificationTrigger.addListener(l1);
+		ModificationTrigger.addListener(l2);
 
-		new ModificationMonitor().fire(1, null, null, null, null);
+		new ModificationTrigger().fire(1, null, null, null, null);
 		Mockito.verify(l1).onModification(1, null, null, null, null);
 		Mockito.verify(l2).onModification(1, null, null, null, null);
 	}
@@ -44,11 +50,11 @@ public class ModificationMonitorTest {
 	@Test
 	public void testFireProcessesRows() {
 		ModificationListener listener = getMockListener();
-		ModificationMonitor.addListener(listener);
+		ModificationTrigger.addListener(listener);
 
 		Object[] oldRow = getRow(1, "hello", 1234567l);
 		Object[] newRow = getRow(2, "hallo", 9876l);
-		new ModificationMonitor().fire(1, "name", "table", oldRow, newRow);
+		new ModificationTrigger().fire(1, "name", "table", oldRow, newRow);
 
 		Mockito.verify(listener).onModification(1, "name", "table", Arrays.asList(oldRow), Arrays.asList(newRow));
 	}

@@ -2,6 +2,21 @@ package hu.ferencbalogh.actionmonitor.entity;
 
 import java.io.Serializable;
 
+/**
+ * <p><b>Action entity</b></p>
+ * 
+ * <p>Contains the following:</p>
+ * 
+ * <p><ol>
+ * 	<li>Table name</li>
+ *  <li>Action name (INSERT, UPDATE, DELETE)</li>
+ *  <li>The old record (null if none)</li>
+ *  <li>The new record (null if none)</li>
+ * </ol></p> 
+ * 
+ * @author Ferenc Balogh - baloghf87@gmail.com
+ *
+ */
 public class Action implements Serializable {
 	private String table;
 	private String action;

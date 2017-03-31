@@ -7,11 +7,23 @@ import java.sql.Statement;
 
 import org.hsqldb.Trigger;
 import org.hsqldb.server.Server;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 
+/**
+ * <p>
+ * Abstract ancestor class for tests using {@link ApplicationContext}
+ * </p>
+ * 
+ * @author Ferenc Balogh - baloghf87@gmail.com
+ *
+ */
 public class DatabaseMonitor {
+
+	private static final Logger log = LoggerFactory.getLogger(DatabaseMonitor.class);
 
 	@Value("${hsql.tablename}")
 	private String tableName;
@@ -26,30 +38,47 @@ public class DatabaseMonitor {
 	private ApplicationContext applicationContext;
 
 	private Connection connection;
-	
+
+	/**
+	 * Start HSQLDB and create tables if not yet exist
+	 */
+	@SuppressWarnings("unused")
 	private void initialize() throws ClassNotFoundException, SQLException {
+		log.info("Starting Database");
+
 		server.start();
 		connection = applicationContext.getBean(Connection.class);
 
 		if (!tableExists()) {
+			log.info("Initializing database");
 			createTableAndTriggers();
+		} else {
+			log.info("Database already initialized");
 		}
 	}
 
+	/**
+	 * Look for the configured tablename in database metadata
+	 * 
+	 * @return true if the table already exists
+	 */
 	private boolean tableExists() throws SQLException {
 		ResultSet tables = connection.getMetaData().getTables(null, null, tableName, new String[] { "TABLE" });
 		return tables.next();
 	}
-	
+
 	private void createTableAndTriggers() throws SQLException {
+		log.info("Creating table");
 		createTable();
-		
+
+		log.info("Creating triggers");
 		createInsertTrigger();
 		createUpdateTrigger();
 		createDeleteTrigger();
 	}
 
 	private void executeUpdate(String statement) throws SQLException {
+		log.debug("Executing: {}", statement);
 		Statement stmt = connection.createStatement();
 		stmt.executeUpdate(statement);
 		stmt.close();
