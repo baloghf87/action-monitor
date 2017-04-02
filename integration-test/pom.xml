@@ -19,6 +19,14 @@
 			<groupId>hu.ferencbalogh.action-monitor</groupId>
 			<artifactId>webserver</artifactId>
 			<version>${project.version}</version>
+			<classifier>classes</classifier>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>hu.ferencbalogh.action-monitor</groupId>
+			<artifactId>webserver</artifactId>
+			<version>${project.version}</version>
+			<type>pom</type>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
