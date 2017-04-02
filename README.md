@@ -1,6 +1,7 @@
 # Action-monitor
 
 **Specification**
+
 [Download PDF](https://raw.githubusercontent.com/baloghf87/action-monitor/master/Senior_Java_Developer_-_Technical_Exercise.pdf)
 
 **Architecture**
