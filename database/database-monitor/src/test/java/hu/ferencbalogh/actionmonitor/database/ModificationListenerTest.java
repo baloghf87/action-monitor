@@ -18,7 +18,7 @@ import hu.ferencbalogh.actionmonitor.database.monitor.ModificationTrigger.Modifi
  * @author Ferenc Balogh - baloghf87@gmail.com
  *
  */
-public class ModificationMonitorTest {
+public class ModificationListenerTest {
 
 	@Test
 	public void testAddListener() {

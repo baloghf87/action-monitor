@@ -1,4 +1,4 @@
-package hu.ferencbalogh.actionmonitor.web.integration;
+package hu.ferencbalogh.actionmonitor.web.integrationtest.util;
 
 import java.lang.reflect.Type;
 import java.util.Arrays;

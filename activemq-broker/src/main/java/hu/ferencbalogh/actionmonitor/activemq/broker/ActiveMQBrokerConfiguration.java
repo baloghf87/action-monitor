@@ -2,8 +2,6 @@ package hu.ferencbalogh.actionmonitor.activemq.broker;
 
 import java.util.Arrays;
 
-import javax.jms.ConnectionFactory;
-
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.activemq.MessageTransformer;
 import org.springframework.beans.factory.annotation.Value;
@@ -35,7 +33,7 @@ public class ActiveMQBrokerConfiguration {
 	private String trustedPackages;
 
 	@Bean
-	public ConnectionFactory connectionFactory() {
+	public ActiveMQConnectionFactory connectionFactory() {
 		ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory();
 		connectionFactory.setBrokerURL(brokerUrl);
 		connectionFactory.setTransformer(rawToRecordTransformer());

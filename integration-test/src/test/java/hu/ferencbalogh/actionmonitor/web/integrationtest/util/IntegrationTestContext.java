@@ -1,4 +1,4 @@
-package hu.ferencbalogh.actionmonitor.web.integration;
+package hu.ferencbalogh.actionmonitor.web.integrationtest.util;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;

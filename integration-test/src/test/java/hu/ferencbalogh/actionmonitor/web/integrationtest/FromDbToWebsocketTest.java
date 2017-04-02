@@ -1,4 +1,4 @@
-package hu.ferencbalogh.actionmonitor.web.integration;
+package hu.ferencbalogh.actionmonitor.web.integrationtest;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
@@ -15,6 +15,9 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 import hu.ferencbalogh.actionmonitor.database.util.RecordDao;
 import hu.ferencbalogh.actionmonitor.entity.Record;
+import hu.ferencbalogh.actionmonitor.web.integrationtest.util.ApplicationThread;
+import hu.ferencbalogh.actionmonitor.web.integrationtest.util.IntegrationTestContext;
+import hu.ferencbalogh.actionmonitor.web.integrationtest.util.WebsocketClientThread;
 /**
  * <p>End-to-end test: manipulate database and assert output on websocket</p>
  * 

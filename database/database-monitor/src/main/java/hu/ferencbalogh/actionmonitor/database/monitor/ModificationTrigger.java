@@ -27,12 +27,12 @@ public class ModificationTrigger implements Trigger {
 	private static Set<ModificationListener> modificationListeners = new LinkedHashSet<ModificationListener>();
 
 	public static boolean addListener(ModificationListener listener) {
-		log.debug("Adding listener: {}" + listener);
+		log.debug("Adding listener: {}", listener);
 		return modificationListeners.add(listener);
 	}
 
 	public static boolean removeListener(ModificationListener listener) {
-		log.debug("Removing listener: {}" + listener);
+		log.debug("Removing listener: {}", listener);
 		return modificationListeners.remove(listener);
 	}
 
@@ -49,7 +49,7 @@ public class ModificationTrigger implements Trigger {
 	}
 
 	public void fire(int triggerType, String name, String table, Object oldRow[], Object newRow[]) {
-		log.debug("Trigger - Action: {}, table: {}, old row: {}, new row: {}" + name, table, oldRow, newRow);
+		log.debug("Trigger - Action: {}, table: {}, old row: {}, new row: {}", name, table, oldRow, newRow);
 		modificationListeners.forEach(listener -> {
 			List<Object> oldRowAsList = null;
 			List<Object> newRowAsList = null;

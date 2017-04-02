@@ -1,4 +1,4 @@
-package hu.ferencbalogh.actionmonitor.web.integration;
+package hu.ferencbalogh.actionmonitor.web.integrationtest.util;
 
 import hu.ferencbalogh.actionmonitor.web.Application;
 

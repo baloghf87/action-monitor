@@ -9,6 +9,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.ui.ModelMap;
 
 import hu.ferencbalogh.actionmonitor.database.AbstractSpringTest;
+import hu.ferencbalogh.actionmonitor.status.ServiceStatusChecker;
+import hu.ferencbalogh.actionmonitor.web.status.ApplicationStatusChecker;
 
 @ContextConfiguration(classes = WebAppControllerTest.class)
 public class WebAppControllerTest extends AbstractSpringTest {
@@ -22,9 +24,22 @@ public class WebAppControllerTest extends AbstractSpringTest {
 	@Autowired
 	private WebAppController webAppController;
 
+	@Autowired
+	private ApplicationStatusChecker applicationStatusChecker;
+
 	@Bean
 	public WebAppController webAppController() {
 		return new WebAppController();
+	}
+
+	@Bean
+	public ApplicationStatusChecker applicationStatusChecker() {
+		return Mockito.mock(ApplicationStatusChecker.class);
+	}
+
+	@Bean
+	public ServiceStatusChecker statusChecker() {
+		return Mockito.mock(ServiceStatusChecker.class);
 	}
 
 	@Test
@@ -33,6 +48,12 @@ public class WebAppControllerTest extends AbstractSpringTest {
 		webAppController.index(mockModelMap);
 		Mockito.verify(mockModelMap).put("topic", topic);
 		Mockito.verify(mockModelMap).put("endpoint", endpoint);
+	}
+
+	@Test
+	public void testStatus() {
+		webAppController.status();
+		Mockito.verify(applicationStatusChecker).getStatus();
 	}
 
 }
