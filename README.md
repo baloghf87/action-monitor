@@ -1,11 +1,13 @@
 # Action-monitor
 
+**Specification**
+[Download PDF](https://raw.githubusercontent.com/baloghf87/action-monitor/master/Senior_Java_Developer_-_Technical_Exercise.pdf)
 
 **Architecture**
-```
-[ Client 1 ] --------v                                                                /--> [ Websocket client 1 ]
-[ Client 2 ] ------->[ HSQLDB ] --Trigger--> [ ActiveMQ ] --> [ Spring Integration ] ----> [ Websocket client 2 ]
-[ Client n ] --------^                                                                \--> [ Websocket client n ]
+``` 
+[DB Client 1] ---v                                                                                                                     /--> [Websocket client 1]
+[DB Client 2] -->[HSQLDB]-->Trigger-->[ActiveMQ topic]-->[Inbound channel]-->[Transform to String]-->[Outbound channel]-->[STOMP topic]---> [Websocket client 2]
+[DB Client n] ---^                                                                                                                     \--> [Websocket client n]
  ```
  
 **Prerequisites**
